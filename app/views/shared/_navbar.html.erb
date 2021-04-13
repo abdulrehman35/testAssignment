@@ -18,7 +18,9 @@
             <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
           </li>
         <% end %>
-        <%= link_to "New Project", new_project_path, class: 'nav-link' %>
+        <% if user_signed_in? && current_user.has_role?(:Admin) %>
+          <%= link_to "New Project", new_project_path, class: 'nav-link' %>
+        <% end %>
       </ul>
     </div>
   </div>

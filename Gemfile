@@ -14,6 +14,12 @@ gem "rolify"
 
 gem 'activeadmin'
 
+gem 'simple_form'
+
+gem 'pundit'
+
+gem 'aasm'
+
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets

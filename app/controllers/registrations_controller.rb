@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
 	def create
-		#debugger
+		debugger
 		@user = User.new(user_params)
 		if @user.save
 			redirect_to projects_path, notice: "User created successfully."

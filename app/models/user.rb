@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :Project_users
   has_many :projects, through: :Project_users
 
+  has_many :tasks
+
   # after_create :assign_default_role
 
   # def assign_default_role

@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Edit Project</h2>
+</div>
+
+<div class="container">
+  <%= simple_form_for @project do |f| %>
+
+    <%= f.input :title, input_html: {class: "w-25"} %>
+    <%= f.input :description, input_html: {class: "w-25"} %>
+    <%= f.select :user_ids, User.all.collect { |u| [u.name, u.id]}, {:include_blank => false, include_hidden: false}, :multiple => true %>
+    <!-- <%= f.association :users, :collection => User.all, :input_html => { :multiple => true }  %> -->
+    <!-- <%= f.association :users, label_method: :name, value_method: :id, include_blank: false, :input_html => {:maxlength =>50, :style=> 'width: 500px'} %> -->
+    <br>
+    <%= f.button :submit, class:"btn-primary" %>
+  <% end %>
+</div>

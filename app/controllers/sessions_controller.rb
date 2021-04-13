@@ -8,7 +8,7 @@ class SessionsController < Devise::SessionsController
     # end
     @user = User.find_by(email: params[:user][:email])
     if @user.present? && !@user.active
-      redirect_to root_path, notice: "Your account is yet to approved!"
+      redirect_to new_user_session_path, notice: "Your account is yet to approved!"
     else
       super
 

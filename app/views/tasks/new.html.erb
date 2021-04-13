@@ -1,0 +1,23 @@
+<h4>Add Task</h4>
+
+<div class="container">
+  <%= simple_form_for [@project, @project.tasks.new] do |f| %>
+
+    <%= f.input :title, input_html: {class: "w-25"} %>
+    <%= f.input :description, input_html: {class: "w-25"} %>
+    <div class="mx-1 my-1">
+      <%= label :selectUser, 'Select user' %>
+      <%= f.select :user_id, @project.users.all.collect { |u| [u.name, u.id]}, {:include_blank => true, include_hidden: false}  %>
+    </div>
+
+    <div class="mx-1 my-1">
+      <%= f.collection_radio_buttons :type, [['Feature', 'Feature'] ,['Bug', 'Bug']],:first, :last %>
+    </div>
+    <div class="mx-1 my-1">
+      <%= f.file_field :image, accept: 'image/jpeg,  image/png'%>
+    </div>
+    <div class="mx-1 my-2">
+      <%= f.button :submit, class:"btn-primary" %>
+    </div>
+  <% end %>
+</div>

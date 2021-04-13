@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
+  include Pundit
 	before_action :configure_permitted_parameters, if: :devise_controller?
+
+  rescue_from Pundit::NotAuthorizedError do
+    redirect_to root_url, alert: 'You do not have access to perform that action.'
+  end
 
 
   def authenticate_admin_user!

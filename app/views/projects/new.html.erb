@@ -1,1 +1,21 @@
-new.html.erb
+<h3 class="text-center">Add Project</h3>
+
+<div class="container ms-auto">
+  <%= simple_form_for @project do |f| %>
+
+    <%= f.input :title, input_html: {class: "w-25"} %>
+    <%= f.input :description, input_html: {class: "w-25"} %>
+    <div class="mx-1">
+      <%= label :selectUsers, 'Select users:' %>
+    </div>
+    <div class="mx-3 my-2">
+      <%= f.select :user_ids, User.all.collect { |u| [u.name, u.id]}, {:include_blank => false, include_hidden: false}, :multiple => true  %>
+    </div>
+    <!-- <%= f.association :users, :collection => User.all, :input_html => { :multiple => true }  %> -->
+    <!-- <%= f.association :users, label_method: :name, value_method: :id, include_blank: false, :input_html => {:maxlength =>50, :style=> 'width: 500px'} %> -->
+
+    <%= f.button :submit, class:"btn-primary" %>
+  <% end %>
+</div>
+
+
