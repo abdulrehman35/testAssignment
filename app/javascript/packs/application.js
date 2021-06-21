@@ -18,3 +18,5 @@ import"bootstrap/dist/js/bootstrap.bundle.min.js"
 // import the app/assets/stylesheets/application.css 
 // file from the previous step.
 // import "../../assets/stylesheets/application;"
+
+import "controllers"

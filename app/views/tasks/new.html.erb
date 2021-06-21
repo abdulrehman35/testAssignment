@@ -14,7 +14,7 @@
       <%= f.collection_radio_buttons :type, [['Feature', 'Feature'] ,['Bug', 'Bug']],:first, :last %>
     </div>
     <div class="mx-1 my-1">
-      <%= f.file_field :image, accept: 'image/jpeg,  image/png'%>
+      <%= f.file_field :image%>
     </div>
     <div class="mx-1 my-2">
       <%= f.button :submit, class:"btn-primary" %>

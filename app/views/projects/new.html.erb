@@ -6,7 +6,7 @@
     <%= f.input :title, input_html: {class: "w-25"} %>
     <%= f.input :description, input_html: {class: "w-25"} %>
     <div class="mx-1">
-      <%= label :selectUsers, 'Select users:' %>
+      <%= label :selectUsers, 'Select Team:' %>
     </div>
     <div class="mx-3 my-2">
       <%= f.select :user_ids, User.all.collect { |u| [u.name, u.id]}, {:include_blank => false, include_hidden: false}, :multiple => true  %>

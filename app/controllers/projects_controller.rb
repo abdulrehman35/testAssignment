@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   def create
     debugger
     @project = Project.new(project_params)
-    @project.creator_id = current_user.creator_id
+    @project.creator_id = current_user.id
     if @project.save
       redirect_to projects_path, notice: "Project created successfully."
     else
@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-
+    #authorize @project
   end
 
 

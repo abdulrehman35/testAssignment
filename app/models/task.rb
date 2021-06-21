@@ -6,7 +6,9 @@ class Task < ApplicationRecord
 
   has_one_attached :image
 
-  validate :image_type
+  # validate :image_type
+  validates :title, presence: true
+  #validates :user_id, presence: true
 
   belongs_to :creator, class_name: "User"
 
@@ -36,8 +38,7 @@ private
 def image_type
    if image.attached? == false
      errors.add(:image, "is missing!")
-   end
-   if !image.content_type.in?(%('image/jpeg image/png'))
+   elsif !image.content_type.in?(%('image/jpeg image/png'))
      errors.add(:image, "needs to be a jpeg or png!")
    end
 end

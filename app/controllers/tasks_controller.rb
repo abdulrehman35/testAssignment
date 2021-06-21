@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:show, :edit, :update, :destroy]
+  before_action :find_task, only: [:show, :edit, :update, :destroy, :change_status]
   before_action :authenticate_user!
   def new
     #debugger
@@ -8,9 +8,9 @@ class TasksController < ApplicationController
 
   def create
     # @project = Project.find(params[:project_id])
-   #  @task = @project.tasks.create(task_params)
-   #  redirect_to project_path(@project)
-    debugger
+    #  @task = @project.tasks.create(task_params)
+    #  redirect_to project_path(@project)
+    #debugger
     @project = Project.find(params[:project_id])
     @task = @project.tasks.new(task_params)
     @task.creator_id = current_user.id
@@ -18,11 +18,24 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to project_path(@project), notice: "Task created successfully."
     else
-      render 'new'
+      @task.errors.messages[:image].first
+      flash.now[:notice] = "Task creation failed"
+      render :new
+    end
+  end
+
+  def change_status
+    #debugger
+    @task = Task.find(params[:id])
+    if @task.aasm.fire!(params[:name])
+      redirect_to request.referer, notice: "Status changed successfully."
+    else
+      redirect_to request.referer, notice: "Status changed failed"
     end
   end
 
   def show
+    @project = Project.find(params[:project_id])
   end
 
   def edit

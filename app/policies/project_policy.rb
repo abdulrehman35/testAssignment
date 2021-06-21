@@ -11,6 +11,11 @@ class ProjectPolicy < ApplicationPolicy
     end
   end
 
+  # def show?
+
+  #   (@user.has_role? :Admin) || (@user.project_ids.include? @project.id)
+  # end
+
   def new?
     #debugger
     @user.has_role? :Admin

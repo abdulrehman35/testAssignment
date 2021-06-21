@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root to: "projects#index"
   resources :projects do
-    resources :tasks
+    resources :tasks do
+      get 'change_status', on: :member
+    end
   end
+
 end

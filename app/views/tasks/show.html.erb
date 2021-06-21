@@ -1,1 +1,45 @@
-<h1>Task Details</h1>
+<div class="container">
+  <h2>Task Details</h2>
+  <div class="row text-center fw-bold fs-2">
+    <p><%= @task.title %></p>
+  </div>
+  <h3>Description: </h3>
+  <div class="ms-5 fs-2"> <%= @task.description %></div>
+  <div class="row">
+    <p class="fw-normal fs-3">Assign User: <span class="ms-3 fs-4"><%= @task.user.name %></span>
+      <span class="fs-4">{<%= @task.user.roles.pluck(:name).first %>}</span></p>
+  </div>
+  <div class="row">
+    <p class="fw-normal fs-3">Task Type: <span class="ms-3 fs-4"><%= @task.type %></span></p>
+  </div>
+  <div class="row">
+    <p class="fw-normal fs-3">Task Status: <span class="ms-3 fs-4"><%= @task.aasm_state %></span></p>
+  </div>
+  <div class="dropdown">
+    <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      Change Status
+    </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <% @task.aasm.events.map(&:name).each  do |event|%>
+          <li class="dropdown-item">
+            <%= link_to "#{event}", change_status_project_task_path(name: "#{event}") %>
+          </li>
+        <% end %>
+      </ul>
+  </div>
+  <% if @task.image.attached? %>
+    <h3>Screenshot: </h3>
+    <div class="ms-5">
+      <%= image_tag(@task.image, class: "w-50") %>
+    </div>
+  <% end %>
+
+
+  <div class="text-center mb-4 mt-4">
+    <% if policy(@project).edit? %>
+      <%= link_to "Edit Project", edit_project_path(@project), :class => "btn btn-outline-info btn-sm" %>
+      <%= link_to "Delete Project", project_path(@project), :class => "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: "Are your sure?"} %>
+    <% end %>
+    <%= link_to "Add Task", new_project_task_path(@project), :class => "btn btn-outline-primary btn-sm" %>
+  </div>
+</div>
